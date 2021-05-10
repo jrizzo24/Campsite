@@ -1,0 +1,62 @@
+{
+	"id": "a93c3dee-7d57-476c-9af2-1e4c8c4d0457",
+	"name": "Campsite",
+	"timestamp": "2021-05-09T18:17:51.054Z",
+	"collection_id": "719378d0-8822-45e5-b45e-55745f34f615",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "e809152e-a487-4d98-9c0b-1a79704b8ae9",
+			"name": "localhost:8080/reservation",
+			"url": "http://localhost:8080/reservation",
+			"time": 77,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				77
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "927b2bc8-13bd-460d-95e5-da794d88928f",
+			"name": "localhost:8080/reservation2",
+			"url": "http://localhost:8080/reservation",
+			"time": 65,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				65
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 142,
+	"collection": {
+		"requests": [
+			{
+				"id": "e809152e-a487-4d98-9c0b-1a79704b8ae9",
+				"method": "POST"
+			},
+			{
+				"id": "927b2bc8-13bd-460d-95e5-da794d88928f",
+				"method": "POST"
+			}
+		]
+	}
+}

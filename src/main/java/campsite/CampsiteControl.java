@@ -2,7 +2,6 @@ package campsite;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -27,8 +26,8 @@ public class CampsiteControl {
     @GetMapping("/availability")
     List<Availability> getAvailability(@RequestParam(required = false) String start,
                                        @RequestParam(required = false) String end)  {
-        LocalDate startDate = null;
-        LocalDate endDate   = null;
+        LocalDate startDate;
+        LocalDate endDate;
         try {
             // startDate Defaults to today, endDate Defaults to a month after
             startDate = (start != null ? LocalDate.parse(start) : LocalDate.now());
@@ -62,18 +61,12 @@ public class CampsiteControl {
 
     @GetMapping("/reservation/{id}")
     SiteReservation getReservation(@PathVariable Integer id) {
-        return repo.findById(id).orElseThrow(() -> new ReservationNotFoundException(id));
+        return findById(id);
     }
 
     @PutMapping("/reservation/{id}")
     SiteReservation putReservation(@RequestBody SiteReservation newReservation, @PathVariable Integer id){
-        SiteReservation reservation = new SiteReservation();
-
-        try {
-            reservation = repo.findById(id).get();
-        } catch (NoSuchElementException e){
-            throw new ReservationNotFoundException(id);
-        }
+        SiteReservation reservation = findById(id);
 
         reservation.update(newReservation);
         if (reservation.isValid()) {
@@ -87,7 +80,10 @@ public class CampsiteControl {
 
     @DeleteMapping("reservation/{id}")
     void deleteReservation(@PathVariable Integer id){
-       repo.deleteById(id);
+        SiteReservation reservation = findById(id);
+
+        if (reservation.getId() != null)
+           repo.deleteById(id);
     }
 
     /*
@@ -99,6 +95,19 @@ public class CampsiteControl {
         }
         catch (RuntimeException e){
             throw new DayReservedException();
+        }
+        return reservation;
+    }
+
+    /*
+     * Helper function to save a reservation
+     */
+    private SiteReservation findById(Integer id){
+        SiteReservation reservation;
+        try {
+            reservation = repo.findById(id).get();
+        } catch (NoSuchElementException e){
+            throw new ReservationNotFoundException(id);
         }
         return reservation;
     }

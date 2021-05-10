@@ -1,7 +1,5 @@
 package campsite;
 
-import org.apache.tomcat.jni.Local;
-
 import java.time.LocalDate;
 
 public class ArrivalMinConstraint implements ReservationConstraint{

@@ -1,7 +1,6 @@
 package campsite;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +79,22 @@ public class SiteReservation {
         return validator.validate();
     }
 
+    @Override
+    public String toString() {
+        return "SiteReservation{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", days=" + days +
+                '}';
+    }
+
+    public void reserveDay(LocalDate day){
+        days.add(day);
+    }
+
     /*
      * Getters and Setters
      */
@@ -108,7 +123,7 @@ public class SiteReservation {
     }
 
     public LocalDate getCheckIn() {
-        return ( checkIn != null ? checkIn : days.get(1) );
+        return ( checkIn != null ? checkIn : days.get(0) );
     }
 
     public void setCheckIn(LocalDate checkIn) {
@@ -143,21 +158,4 @@ public class SiteReservation {
     public void setDays(List<LocalDate> days) {
         this.days = days;
     }
-
-    @Override
-    public String toString() {
-        return "SiteReservation{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", checkIn=" + checkIn +
-                ", checkOut=" + checkOut +
-                ", days=" + days +
-                '}';
-    }
-
-    public void reserveDay(LocalDate day){
-        days.add(day);
-    }
-
 }

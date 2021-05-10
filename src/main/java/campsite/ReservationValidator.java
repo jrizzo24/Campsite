@@ -1,7 +1,5 @@
 package campsite;
 
-import com.sun.tools.jconsole.JConsoleContext;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -23,7 +23,7 @@ System Requirements
 # Implementation
 This program uses Spring Boot to implement a REST API and JPA to handle the storage of data into a Postgresql database. 
 
-The Constraints of requesting a booking are checked using the ReservationValidator class, wich is based off of the Decorator Design pattern. This class adds to itself a set of objects that implement the ReservationConstraint interface. Each constraint is checked, and if one fails the reason is saved to the reservation to be displayed to the user. 
+The Constraints of requesting a booking are checked using the ReservationValidator class, which is based off of the Decorator Design pattern. This class adds to itself a set of objects that implement the ReservationConstraint interface. Each constraint is checked, and if one fails the reason is saved to the reservation to be displayed to the user. 
 
 The Postgres database has two tables: reservations and reserved_days which are related by a primary/forgeign key mapping. The SQL script to build the tables is in the sql directory of this project. The database design makes it simple to check availability by pulling all the days stored in the table and marking them unavailable for the user to book. The unique index on the days column of reserved_days will handle any requests to book an already reserved day, even concurrent ones without the need to lock any database records. 
 
